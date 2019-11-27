@@ -36,3 +36,10 @@
     transform: translate(-50%, -50%);
 
 }
+
+.deleteButton{
+
+    margin-left: auto;
+    width: 40px;
+    cursor: pointer;
+}

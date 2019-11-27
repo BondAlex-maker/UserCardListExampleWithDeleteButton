@@ -47,24 +47,6 @@
     appendUsersListItems(userListElem, users);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     function appendUsersListItems(usersListElem, users) {
         users.forEach(
             user => {
@@ -76,9 +58,8 @@
     function createUserListItemElem(user) {
 
         const userListItemElem = document.createElement("li");
-
-        userListItemElem.append( createUserCardElem(user) );
-
+        userListItemElem.setAttribute("id", user.id);
+        userListItemElem.append(createUserCardElem(user));
         return userListItemElem;
     }
 
@@ -89,6 +70,7 @@
 
         userCardWrapperElem.append(createUserPictureElem(user));
         userCardWrapperElem.append(createUserFullNameElem(user));
+        userCardWrapperElem.append(createDeleteButtonElem(user));
 
         return userCardWrapperElem
     }
@@ -98,14 +80,14 @@
         userPictureElem.setAttribute('src', imageSrc ? imageSrc : "./assets/icons/user_icon.png");
         userPictureElem.setAttribute("alt", "user picture");
 
-        return  userPictureElem;
+        return userPictureElem;
     }
 
     function createUserPictureElem(user) {
         const userPictureContainerElem = document.createElement("div");
         userPictureContainerElem.classList.add('userPictureContainer');
 
-        userPictureContainerElem.append( getUserPictureElem(user) );
+        userPictureContainerElem.append(getUserPictureElem(user));
 
         return userPictureContainerElem;
     }
@@ -117,6 +99,27 @@
 
         return userFullNameElem;
     }
+
+
+    function createDeleteButtonElem({id: userId}) {
+        const deleteButtonElem = document.createElement('img');
+
+        deleteButtonElem.classList.add('deleteButton');
+        deleteButtonElem.setAttribute('src', './assets/icons/cross.png');
+        deleteButtonElem.setAttribute('alt', 'DELETE');
+
+        deleteButtonElem.addEventListener('click', (event) => {
+
+            event.stopPropagation();
+            const userListItemElem = document.getElementById(userId);
+            userListItemElem.remove();
+
+        });
+
+        return deleteButtonElem;
+
+    }
+
 
 </script>
 </body>
